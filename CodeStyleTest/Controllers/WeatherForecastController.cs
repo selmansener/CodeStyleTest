@@ -22,9 +22,7 @@ namespace CodeStyleTest.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            List<int> test = new List<int>();
-
-            Console.WriteLine("tst");
+            var test = new List<int>();
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
