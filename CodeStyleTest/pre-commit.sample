@@ -6,11 +6,21 @@
 # it wants to stop the commit.
 #
 # To enable this hook, rename this file to "pre-commit".
-dotnet format -v n --verify-no-changes
+declare -a changes=($(git diff HEAD --name-only --diff-filter=ACM))
+
+for i in "${changes[@]}"
+do
+includedFiles+="$i "
+done
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+dotnet format -v n --verify-no-changes --include $includedFiles
 result=$?
 if [ $result -ne 0 ]; then
-    echo "dotnet format resulted with code: $result"
-    echo "Commit aborted"
-    echo "Check for warnings"
+    echo -e "${RED}dotnet format resulted with code: $result${NC}"
+    echo -e "${RED}Commit aborted${NC}"
+    echo -e "${RED}Check for warnings or errors${NC}"
 fi
 exit $result
