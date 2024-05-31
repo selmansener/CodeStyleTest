@@ -24,6 +24,8 @@ namespace CodeStyleTest.Controllers
         {
             List<int> test = new List<int>();
 
+            Console.WriteLine("tst");
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
